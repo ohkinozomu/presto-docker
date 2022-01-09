@@ -1,0 +1,19 @@
+name: test
+on: push
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: docker build 
+        run: docker build -t ohkinozomu/presto:staging .
+      - name: docker run
+        run: docker container run -d -p 8080:8080 ohkinozomu/presto:staging
+      - name: Hack
+        run: sleep 20
+      - name: Install presto
+        run: |
+          wget --quiet https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/0.265.1/presto-cli-0.265.1-executable.jar
+          java -jar presto-cli-0.265.1-executable.jar --execute "SHOW CATALOGS"
