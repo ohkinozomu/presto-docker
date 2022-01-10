@@ -1,5 +1,5 @@
 FROM debian:bullseye-slim
-ARG PRESTO_VERSION="0.265.1"
+ARG PRESTO_VERSION="0.267"
 RUN apt update && \
 apt install -y wget python3 openjdk-11-jdk && \
 ln -s /usr/bin/python3 /usr/bin/python && \
