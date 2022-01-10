@@ -5,6 +5,9 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
+      - name: Set env
+        run: |
+          echo "PRESTO_VERSION=0.265.1" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v2
       - name: docker build 
@@ -15,5 +18,5 @@ jobs:
         run: sleep 20
       - name: Install presto
         run: |
-          wget --quiet https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/0.265.1/presto-cli-0.265.1-executable.jar
-          java -jar presto-cli-0.265.1-executable.jar --execute "SHOW CATALOGS"
+          wget --quiet https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/${{ env.PRESTO_VERSION }}/presto-cli-${{ env.PRESTO_VERSION }}-executable.jar
+          java -jar presto-cli-${{ env.PRESTO_VERSION }}-executable.jar --execute "SHOW CATALOGS"
