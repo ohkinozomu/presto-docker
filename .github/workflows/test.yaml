@@ -9,7 +9,7 @@ jobs:
         run: |
           echo "PRESTO_VERSION=0.267" >> $GITHUB_ENV
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: docker build 
         run: docker build -t ohkinozomu/presto:staging .
       - name: docker run
